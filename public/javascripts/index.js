@@ -25,6 +25,22 @@ var createNewTaskElement = function(taskString, dueDate) {
     //button.delete
     var deleteButton = document.createElement("button");
 
+    var taskData = {
+        name: taskString,
+        dueDate: dueDate
+    };
+
+    $.ajax({
+        url: '/task/add',
+        type: 'PUT',
+        data: taskData,
+    }).then(response => {
+        console.log(response);
+        checkBox.setAttribute('data-id', response._id);
+        editButton.setAttribute('data-id', response._id);
+        deleteButton.setAttribute('data-id', response._id);
+    });
+
     //Each element needs modifying
 
     checkBox.type = "checkbox";
@@ -48,7 +64,7 @@ var createNewTaskElement = function(taskString, dueDate) {
 
 
     return listItem;
-}
+};
 
 //Add a new task
 var addTask = function() {
@@ -57,20 +73,6 @@ var addTask = function() {
     //Append listItem to incompleteTasksHolder
     incompleteTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskCompleted);
-
-    var taskData = {
-        name: taskInput.value,
-        dueDate: taskDueDateInput.value
-    };
-
-    $.ajax({
-        url: '/task/add',
-        type: 'PUT',
-        data: taskData,
-    }).then(response => {
-        console.log(response);
-    });
-
 
     taskInput.value = "";
 }

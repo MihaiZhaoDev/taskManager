@@ -31,6 +31,7 @@ exports.addTask = (req, res, next) => {
         if (err) return console.error(err);
 
         res.json({
+            _id: newTask._id,
             success: true,
             message: 'Task has been saved.'
         });
