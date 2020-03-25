@@ -15,14 +15,16 @@
 
     <h3>Todo</h3>
     <ul id="incomplete-tasks">
-        {{#each tasks}}
+        {{#each undoneTasks}}
             <li><input type="checkbox" data-id="{{_id}}"><label>{{name}}</label><small></br></br>{{formattedDueDate}}</small><input type="text"><button class="edit" data-id="{{id}}">Edit</button><button class="delete" data-id="{{_id}}">Delete</button></li>
         {{/each}}
     </ul>
 
     <h3>Completed</h3>
     <ul id="completed-tasks">
-    </ul>
+        {{#each doneTasks}}
+            <li><input type="checkbox" data-id="{{_id}}" checked><label>{{name}}</label><small></br></br>{{formattedDueDate}}</small><input type="text"><button class="edit" data-id="{{id}}">Edit</button><button class="delete" data-id="{{_id}}">Delete</button></li>
+        {{/each}}    </ul>
 </div>
 
 

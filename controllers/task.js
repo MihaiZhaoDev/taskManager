@@ -2,10 +2,11 @@ const mongoose = require('mongoose');
 const Task = require('../models/task');
 const moment = require('moment');
 
-exports.index = (req, res, next) => {
-    Task.find({}, function (err, tasks) {
-        res.render('index', {title: 'Task Manager', tasks});
-    })
+exports.index = async (req, res, next) => {
+    var undoneTasks = await Task.find({status: false});
+    var doneTasks = await Task.find({status: true});
+
+        res.render('index', {title: 'Task Manager', undoneTasks: undoneTasks, doneTasks: doneTasks});
 };
 
 /**
@@ -22,11 +23,9 @@ exports.addTask = (req, res, next) => {
         name: name,
         dueDate: dueDate,
         formattedDueDate: moment(dueDate).format('LL'),
-        completionDate: completionDate,
-        status: status
+        completionDate: null,
+        status: false
     });
-
-    console.log(newTask);
 
     newTask.save(function (err, save) {
         if (err) return console.error(err);
@@ -102,7 +101,12 @@ exports.markAsDone = (req, res, next) => {
                 task.completionDate = new Date();
                 task.status = true;
 
-                return res.json({success: true, message: 'Task marked as done.'})
+                task.save(function(err, done){
+                    if (err) return console.log(err);
+
+                    return res.json({success: true, message: 'Task marked as done.'})
+
+                });
             }
         });
     }
@@ -124,7 +128,13 @@ exports.markAsNotDone = (req, res, next) => {
             if (task) {
                 task.completionDate = null;
                 task.status = false;
-                return res.json({success: true, message: 'Task marked as NOT done.'});
+
+                task.save(function(err, done){
+                    if (err) return console.log(err);
+
+                    return res.json({success: true, message: 'Task marked as undone.'})
+
+                });
             }
         });
     }
