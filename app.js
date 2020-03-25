@@ -22,7 +22,7 @@ const httpServer = http.createServer(app);
 mongoose.connect(process.env.DATABASEURL, {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).then( () => console.log('Database established the connection.'));
 
 const db = mongoose.connection;
 
@@ -31,8 +31,12 @@ db.on(
     console.error.bind(console, Date() + " - DATABASE: Failure. " + " Error: ")
 );
 db.once("open", function () {
-  console.log('Database connected');
+  console.log('Database connected.');
 });
+
+// Folder to INCLUDE in Express
+//--------------------------------------------------------------------------------------------------------------------
+app.use(express.static(path.join(__dirname, "public")));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -43,8 +47,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
