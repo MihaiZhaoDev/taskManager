@@ -11,7 +11,7 @@ var taskSchema = mongoose.Schema({
     name: {type: String},
     dueDate: {type: Date},
     completionDate: {type: Date},
-    status: {type: String}
+    status: {type: Boolean}
 
 }, {timestamps: true});
 

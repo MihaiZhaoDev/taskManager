@@ -5,12 +5,11 @@ const router = express.Router();
 const controller = require('../controllers/task')
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-    res.render('index', {title: 'Task Manager'});
-});
-
-router.post('/task/add', controller.addTask);
+router.get('/', controller.index);
+router.put('/task/add', controller.addTask);
 router.post('/task/edit', controller.editTask);
-router.post('/task/delete', controller.deleteTask);
+router.delete('/task/delete', controller.deleteTask);
+router.put('/task/done', controller.markAsDone);
+router.put('/task/undone', controller.markAsNotDone);
 
 module.exports = router;
