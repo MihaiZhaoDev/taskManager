@@ -181,7 +181,6 @@ var taskIncomplete = function() {
 }
 
 var bindTaskEvents = function(taskListItem, checkBoxEventHandler) {
-    console.log("Bind list item events");
     //select taskListItem's children
     var checkBox = taskListItem.querySelector("input[type=checkbox]");
     var editButton = taskListItem.querySelector("button.edit");
@@ -198,7 +197,6 @@ var bindTaskEvents = function(taskListItem, checkBoxEventHandler) {
 }
 
 var ajaxRequest = function() {
-    console.log("AJAX request");
 }
 
 //Set the click handler to the addTask function

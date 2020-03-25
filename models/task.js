@@ -10,6 +10,7 @@ var taskSchema = mongoose.Schema({
 
     name: {type: String},
     dueDate: {type: Date},
+    formattedDueDate: {type: String}, // To display on front-end
     completionDate: {type: Date},
     status: {type: Boolean}
 

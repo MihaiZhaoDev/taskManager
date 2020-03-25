@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 
-const controller = require('../controllers/task')
+// Controller
+const controller = require('../controllers/task');
 
-/* GET home page. */
+// Routes
 router.get('/', controller.index);
 router.put('/task/add', controller.addTask);
 router.post('/task/edit', controller.editTask);

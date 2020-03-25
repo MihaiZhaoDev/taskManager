@@ -9,20 +9,19 @@
 <div class="container">
     <p>
         <label for="new-task-name">Add Item</label><input id="new-task-name" type="text"></br>
-        <label for="new-task-dueDate">Add Due Date</label><input id="new-task-dueDate" type="date">
+        <label for="new-task-dueDate">Add Due Date</label><input id="new-task-dueDate" type="date" value="2020-03-25">
         <button>Add</button>
     </p>
 
     <h3>Todo</h3>
     <ul id="incomplete-tasks">
         {{#each tasks}}
-            <li><input type="checkbox" data-id="{{_id}}"><label>{{name}}</label><small></br>{{dueDate}}</small><input type="text"><button class="edit" data-id="{{id}}">Edit</button><button class="delete" data-id="{{_id}}">Delete</button></li>
+            <li><input type="checkbox" data-id="{{_id}}"><label>{{name}}</label><small></br></br>{{formattedDueDate}}</small><input type="text"><button class="edit" data-id="{{id}}">Edit</button><button class="delete" data-id="{{_id}}">Delete</button></li>
         {{/each}}
     </ul>
 
     <h3>Completed</h3>
     <ul id="completed-tasks">
-        <li><input type="checkbox" checked><label>See the Doctor</label><input type="text"><button class="edit">Edit</button><button class="delete">Delete</button></li>
     </ul>
 </div>
 
