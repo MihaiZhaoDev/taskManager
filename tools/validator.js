@@ -5,13 +5,13 @@ const mongoose = require('mongoose');
 // Validate incoming data from user
 exports.newTask = [
     check('name').exists().isLength({min: 1, max: 100}).withMessage('Must be between 1 and 100 chars long'),
-    check('dueDate').optional({checkFalsy: true}).isLength({min: 1, max: 100}).isISO8601().toDate().withMessage('Invalid date'),
+    check('dueDate').exists().isLength({min: 1, max: 100}).custom((value) => (new Date(value) instanceof Date)).withMessage('Invalid date'),
     verify
 ];
 exports.editTask = [
     check('name').optional({checkFalsy: true}).isLength({min: 1, max: 100}).withMessage('Must be between 1 and 100 chars long'),
-    check('dueDate').optional({checkFalsy: true}).isLength({min: 1, max: 100}).isISO8601().toDate().withMessage('Invalid date'),
-    check('completionDate').optional({checkFalsy: true}).isLength({min: 1, max: 100}).isISO8601().toDate().withMessage('Invalid date'),
+    check('dueDate').optional({checkFalsy: true}).isLength({min: 1, max: 100}).custom((value) => (new Date(value) instanceof Date)).withMessage('Invalid date'),
+    check('completionDate').optional({checkFalsy: true}).isLength({min: 1, max: 100}).custom((value) => (new Date(value) instanceof Date)).withMessage('Invalid date'),
     check('status').optional({checkFalsy: true}).isLength({min: 1, max: 100}),
     verify
 ];
