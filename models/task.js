@@ -1,12 +1,12 @@
-// app/models/user.js
+// app/models/task.js
 
-// Tools
-const mongoose = require('mongoose');
+// Use only the necessary to save some time at the execution
+const {Schema, model, set} = require('mongoose');
 
-mongoose.set('useFindAndModify', false);
+set('useFindAndModify', false);
 
 // Schema for User Model
-var taskSchema = mongoose.Schema({
+const taskSchema = Schema({
 
     name: {type: String},
     dueDate: {type: Date},
@@ -21,4 +21,4 @@ var taskSchema = mongoose.Schema({
 // ==============
 
 // Create the model and expose to the app
-module.exports = mongoose.model('Task', taskSchema);
+module.exports = model('Task', taskSchema);

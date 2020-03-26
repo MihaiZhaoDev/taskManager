@@ -1,6 +1,6 @@
+// Tools
 const express = require('express');
 const router = express.Router();
-
 
 // Controller
 const controller = require('../controllers/task');
@@ -13,4 +13,5 @@ router.delete('/task/delete', controller.deleteTask);
 router.put('/task/done', controller.markAsDone);
 router.put('/task/undone', controller.markAsNotDone);
 
+// Export the router to the app
 module.exports = router;

@@ -1,9 +1,19 @@
+// Tools
 const mongoose = require('mongoose');
-const Task = require('../models/task');
 const moment = require('moment');
-
 const handle = require('../tools/handler');
 
+// Models
+const Task = require('../models/task');
+
+/**
+ *  index
+ *  Renders the index view
+ * @param req
+ * @param res
+ * @param next
+ * @returns {Promise<void>}
+ */
 exports.index = async (req, res, next) => {
     try {
         const undoneTasks = await Task.find({status: false});

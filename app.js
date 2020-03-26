@@ -1,21 +1,26 @@
 // Setup ENV
 require("dotenv").config();
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var http = require('http');
-var mongoose = require('mongoose');
+// Tools
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const http = require('http');
+const mongoose = require('mongoose');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+// Routes
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 
+// Http settings
 const httpPort = process.env.PORT || 5000;
 
-var app = express();
+// Create the express app
+const app = express();
 
+// Create the serer
 const httpServer = http.createServer(app);
 
 // Connect to the database
@@ -38,16 +43,18 @@ db.once("open", function () {
 //--------------------------------------------------------------------------------------------------------------------
 app.use(express.static(path.join(__dirname, "public")));
 
-// view engine setup
+// View engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+// Setup tools
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Add the routes to the app
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -56,19 +63,21 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// Error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // Render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
+// Listen for http requests
 httpServer.listen(httpPort, function () {
   console.log("Server HTTP started on port: " + httpPort);
 });
 
+// Export the app
 module.exports = app;

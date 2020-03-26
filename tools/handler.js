@@ -1,5 +1,13 @@
 const createError = require('http-errors');
 
+/**
+ * error
+ * Logs the error to the console and send the http error to the client side
+ * @param err
+ * @param req
+ * @param res
+ * @returns {this|createServer.NextHandleFunction|any|Promise<any>}
+ */
 exports.error = function (err, req, res) {
     // Log the error
     console.error('Error occurred at ' + req.originalUrl);
