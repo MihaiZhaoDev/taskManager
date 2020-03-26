@@ -36,6 +36,7 @@ var createNewTaskElement = function(taskString, dueDate) {
         data: taskData,
     }).then(response => {
         console.log(response);
+        toastr.info(response.message);
         checkBox.setAttribute('data-id', response._id);
         editButton.setAttribute('data-id', response._id);
         deleteButton.setAttribute('data-id', response._id);
@@ -104,6 +105,7 @@ var editTask = function() {
             data: taskData,
         }).then(response => {
             console.log(response);
+            toastr.info(response.message);
         });
     } else {
         //Switch to .editMode
@@ -134,6 +136,7 @@ var deleteTask = function() {
         data: taskData,
     }).then(response => {
         console.log(response);
+        toastr.info(response.message);
     });
 
     //Remove the parent list item from the ul
@@ -154,6 +157,7 @@ var taskCompleted = function() {
         data: taskData,
     }).then(response => {
         console.log(response);
+        toastr.info(response.message);
     });
     //Append the task list item to the #completed-tasks
     var listItem = this.parentNode;
@@ -175,6 +179,7 @@ var taskIncomplete = function() {
         data: taskData,
     }).then(response => {
         console.log(response);
+        toastr.info(response.message);
     });
     //Append the task list item to the #incomplete-tasks
     var listItem = this.parentNode;
