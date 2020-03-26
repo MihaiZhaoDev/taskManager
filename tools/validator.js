@@ -39,7 +39,7 @@ function verify(req, res, next) {
 
         // Get all errors and add them to the message
         errors.array().forEach(function (el) {
-            message = `${message} ${el.msg}(${el.param}) ;`;
+            message = `${message} ${el.msg} (${el.param}) ;`;
         });
 
         // Handle the errors
