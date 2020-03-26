@@ -20,3 +20,12 @@ exports.error = function (err, req, res) {
     if (req.xhr) return res.json({success: false, status: httpError.statusCode, message: httpError.message});
     else return res.send(httpError.message);
 };
+
+exports.validationErrors = function(message, req, res){
+    // Create a http error
+    const httpError = createError(400, message);
+
+    // Send back the response
+    if (req.xhr) return res.json({success: false, status: httpError.statusCode, message: httpError.message});
+    else return res.send(httpError.message);
+};
